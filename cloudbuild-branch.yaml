@@ -30,11 +30,11 @@ steps:
         - '-c'
         - |
          
-            PROJECT=$(gcloud config get-value core/project)
+            _PROJECT=$(gcloud config get-value core/project)
           
             
             gcloud container clusters get-credentials "${_CLUSTER}" \
-              --project "${PROJECT}" \
+              --project "${_PROJECT}" \
               --zone "${_ZONE}"  
   
             sed -i 's|gcr.io/$PROJECT_ID/$_APP_NAME:.*|${_REGION}-docker.pkg.dev/${PROJECT_ID}/kenny-docker-repo/$_APP_NAME:${BRANCH_NAME}-${SHORT_SHA}|' ./k8s/deployments/dev/*.yaml
